@@ -1,0 +1,39 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.1.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.cs.parser'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+bootJar {
+    mainClassName = 'org.springframework.batch.core.launch.support.CommandLineJobRunner'
+
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-batch')
+    compileOnly('org.projectlombok:lombok')
+    compile 'com.google.guava:guava:26.0-jre'
+    runtime("org.hsqldb:hsqldb")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.batch:spring-batch-test')
+}
